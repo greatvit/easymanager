@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class ProcessDetail {
 
+    private String host = "";
     private String command = "";
     private String commandLine = "";
     private Long pid = 0L;

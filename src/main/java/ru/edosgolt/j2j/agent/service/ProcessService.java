@@ -11,20 +11,20 @@ import ru.edosgolt.j2j.agent.model.ProcessDetail;
 import ru.edosgolt.j2j.agent.model.paging.Page;
 import ru.edosgolt.j2j.agent.model.paging.Paged;
 import ru.edosgolt.j2j.agent.model.paging.Paging;
-import ru.edosgolt.j2j.agent.scheduler.ScanProcess;
+import ru.edosgolt.j2j.agent.scheduler.LocalScanProcesses;
 
 @Service
 public class ProcessService {
 
     @Autowired
-    private ScanProcess scanProcess;
+    private LocalScanProcesses localScanProcesses;
 
 
     public Paged<ProcessDetail> getProcesses(int pageNumber, int size) {
 
         List<ProcessDetail> paged = new ArrayList<>();
 
-        for (Map.Entry<String, ProcessDetail> entry : scanProcess.getScannedProcess().entrySet()) {
+        for (Map.Entry<String, ProcessDetail> entry : localScanProcesses.getLocalProcessesList().entrySet()) {
             paged.add( entry.getValue() );
         }
 

@@ -38,8 +38,7 @@
             <table id="example" class="table table-bordered" style="width: 100%">
                 <thead>
                 <tr>
-                    <th>Java</th>
-                    <th>CommandLine</th>
+                    <th>Host</th>
                     <th>Pid</th>
                     <th>Cpu</th>
                     <th>Start</th>
@@ -49,8 +48,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="employee : ${employees.page.content}">
-                    <td th:text="${employee.command}">Command</td>
-                    <td th:text="${employee.commandLine}">Command line</td>
+                    <td th:text="${employee.host}">Host</td>
                     <td th:text="${employee.pid}">pid</td>
                     <td th:text="${employee.cpu}">cpu</td>
                     <td th:text="${employee.starttime}">Start date</td>

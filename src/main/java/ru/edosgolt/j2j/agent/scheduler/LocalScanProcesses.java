@@ -9,34 +9,36 @@ import org.springframework.stereotype.Component;
 import ru.edosgolt.j2j.agent.model.ProcessDetail;
 
 import java.util.LinkedHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Stream;
 
 @EnableScheduling
 @Component
 @Data
-public class ScanProcess {
+public class LocalScanProcesses {
 
-    private LinkedHashMap<String, ProcessDetail> scannedProcess = new LinkedHashMap<>();
+    private LinkedHashMap<String, ProcessDetail> localProcessesList = new LinkedHashMap<>();
 
     @Scheduled(fixedDelay = 1000)
     private void watchDog(){
-        scannedProcess.clear();
+        localProcessesList.clear();
         Stream<ProcessHandle> liveProcesses = ProcessHandle.allProcesses();
         liveProcesses.filter(ProcessHandle::isAlive)
                 .forEach(ph -> {
-                    filterJavaProcessOnly(ph);
+                    discoveryJmeterProcesses(ph);
                 });
-        scannedProcess.toString();
+        localProcessesList.toString();
     }
 
-    private void filterJavaProcessOnly(ProcessHandle ph){
+    private void discoveryJmeterProcesses(ProcessHandle ph){
         String processName = getAmazingText( ph.info().command().toString() );
         String cpu = getAmazingText( ph.info().totalCpuDuration().toString() );
         String startDate = getAmazingText(ph.info().startInstant().toString());
         String commandLine = getAmazingText(ph.info().commandLine().toString());
         String arguments = getAmazingText(ph.info().arguments().toString());
 
-        if  ((isWindowsProcess(processName))|| (isLinuxProcess(processName, commandLine))){
+        if  ((isWindowsJmeter(processName) && isChildrenJavaProcessPresent(ph)) ||
+                (isLinuxJmeter(processName, commandLine))){
             ProcessDetail processDetail = new ProcessDetail();
             processDetail.setCpu(cpu);
             processDetail.setPid(ph.pid());
@@ -44,16 +46,16 @@ public class ScanProcess {
             processDetail.setCommandLine(commandLine );
             processDetail.setCommand( processName );
             processDetail.setArgument(arguments);
-            scannedProcess.put(String.valueOf(ph.pid()), processDetail);
+            localProcessesList.put(String.valueOf(ph.pid()), processDetail);
         }
     }
 
-    private boolean isWindowsProcess(String processName){
-        boolean result = ((SystemUtils.IS_OS_WINDOWS) && ((processName.contains("java")) || (processName.contains("cmd.exe"))));
+    private boolean isWindowsJmeter(String processName){
+        boolean result = ((SystemUtils.IS_OS_WINDOWS) && ((processName.contains("cmd.exe"))));
         return result;
     }
 
-    private boolean isLinuxProcess(String processName, String arguments){
+    private boolean isLinuxJmeter(String processName, String arguments){
         boolean result = ((SystemUtils.IS_OS_LINUX) && ((!processName.contains("bash")) && (arguments.contains("ApacheJMeter.jar"))));
         return result;
     }
@@ -61,7 +63,18 @@ public class ScanProcess {
     private String getAmazingText(String rawText){
         return  rawText.replace("Optional[","")
                 .replace("]","");
+    }
 
+    private boolean isChildrenJavaProcessPresent(ProcessHandle ph){
+        AtomicBoolean result = new AtomicBoolean(false);
+        if (ph.children().count()>0){
+            ph.children().forEach(child -> {
+                if (child.info().command().toString().contains("java")) {
+                    result.set(true);
+                }
+            });
+        }
+        return result.get();
     }
 
 

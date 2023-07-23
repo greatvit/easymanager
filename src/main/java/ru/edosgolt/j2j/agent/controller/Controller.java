@@ -2,25 +2,25 @@ package ru.edosgolt.j2j.agent.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.edosgolt.j2j.agent.service.ProcessService;
 import ru.edosgolt.j2j.utils.EditProject;
 import ru.edosgolt.j2j.utils.KillProcess;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 
-@Controller
+@org.springframework.stereotype.Controller
 @RequestMapping("/")
 @Slf4j
-public class EmployeeController {
+public class Controller {
 
     private final ProcessService processService;
 
     @Autowired
-    public EmployeeController(ProcessService processService) {
+    public Controller(ProcessService processService) {
         this.processService = processService;
     }
 
@@ -43,6 +43,12 @@ public class EmployeeController {
         EditProject editProject = new EditProject();
         editProject.editJmeterProject(pid);
         return "redirect:/";
+    }
+
+    @RequestMapping(value = "/get_plist", method = GET)
+    public String gettingProcessesList(){
+        String result = processService.toString();
+        return result;
     }
 
 }
