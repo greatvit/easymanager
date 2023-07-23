@@ -40,6 +40,7 @@ public class LocalScanProcesses {
         if  ((isWindowsJmeter(processName) && isChildrenJavaProcessPresent(ph)) ||
                 (isLinuxJmeter(processName, commandLine))){
             ProcessDetail processDetail = new ProcessDetail();
+            processDetail.setHost("localhost");
             processDetail.setCpu(cpu);
             processDetail.setPid(ph.pid());
             processDetail.setStarttime( startDate );

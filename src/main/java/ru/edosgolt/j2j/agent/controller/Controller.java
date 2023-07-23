@@ -45,7 +45,7 @@ public class Controller {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/get_plist", method = GET)
+    @RequestMapping(value = "/getlist", method = GET)
     public String gettingProcessesList(){
         String result = processService.toString();
         return result;
