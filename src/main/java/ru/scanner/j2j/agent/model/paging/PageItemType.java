@@ -1,4 +1,4 @@
-package ru.edosgolt.j2j.agent.model.paging;
+package ru.scanner.j2j.agent.model.paging;
 
 public enum PageItemType {
 

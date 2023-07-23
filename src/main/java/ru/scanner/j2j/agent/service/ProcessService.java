@@ -1,4 +1,4 @@
-package ru.edosgolt.j2j.agent.service;
+package ru.scanner.j2j.agent.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,12 +6,11 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import ru.edosgolt.j2j.agent.model.ProcessDetail;
-import ru.edosgolt.j2j.agent.model.paging.Page;
-import ru.edosgolt.j2j.agent.model.paging.Paged;
-import ru.edosgolt.j2j.agent.model.paging.Paging;
-import ru.edosgolt.j2j.agent.scheduler.LocalScanProcesses;
+import ru.scanner.j2j.agent.model.ProcessDetail;
+import ru.scanner.j2j.agent.model.paging.Page;
+import ru.scanner.j2j.agent.model.paging.Paged;
+import ru.scanner.j2j.agent.model.paging.Paging;
+import ru.scanner.j2j.agent.scheduler.LocalScanProcesses;
 
 @Service
 public class ProcessService {

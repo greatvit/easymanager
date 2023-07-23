@@ -1,4 +1,4 @@
-package ru.edosgolt.j2j.agent.scheduler;
+package ru.scanner.j2j.agent.scheduler;
 
 
 import lombok.Data;
@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import ru.edosgolt.j2j.agent.model.ProcessDetail;
-import ru.edosgolt.j2j.agent.profile.ApplicationProfile;
-import ru.edosgolt.j2j.utils.HttpClient;
-import ru.edosgolt.j2j.utils.TinyStringUtils;
+import ru.scanner.j2j.agent.model.ProcessDetail;
+import ru.scanner.j2j.agent.profile.ApplicationProfile;
+import ru.scanner.j2j.utils.HttpClient;
+import ru.scanner.j2j.utils.TinyStringUtils;
 
 import java.util.LinkedHashMap;
 

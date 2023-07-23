@@ -1,4 +1,4 @@
-package ru.edosgolt.j2j.agent;
+package ru.scanner.j2j.agent;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

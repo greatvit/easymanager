@@ -1,12 +1,12 @@
-package ru.edosgolt.j2j.agent.controller;
+package ru.scanner.j2j.agent.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.edosgolt.j2j.agent.service.ProcessService;
-import ru.edosgolt.j2j.utils.EditProject;
-import ru.edosgolt.j2j.utils.KillProcess;
+import ru.scanner.j2j.agent.service.ProcessService;
+import ru.scanner.j2j.utils.EditProject;
+import ru.scanner.j2j.utils.KillProcess;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;

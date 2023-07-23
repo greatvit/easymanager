@@ -1,4 +1,4 @@
-package ru.edosgolt.j2j.agent.profile;
+package ru.scanner.j2j.agent.profile;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;

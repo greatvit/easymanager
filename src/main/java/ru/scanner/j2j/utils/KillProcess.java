@@ -1,4 +1,4 @@
-package ru.edosgolt.j2j.utils;
+package ru.scanner.j2j.utils;
 
 import org.apache.commons.lang3.SystemUtils;
 import org.springframework.stereotype.Component;

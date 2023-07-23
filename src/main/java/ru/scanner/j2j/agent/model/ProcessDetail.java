@@ -1,4 +1,4 @@
-package ru.edosgolt.j2j.agent.model;
+package ru.scanner.j2j.agent.model;
 
 import lombok.Data;
 
